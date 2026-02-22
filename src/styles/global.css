@@ -75,3 +75,28 @@ h1 {
     display: none;
   }
 }
+
+/* Cornell Notes スタイル */
+
+/* CUE calloutを左マージンに配置 */
+.callout-cue {
+  float: left;
+  width: 200px;
+  margin-left: -240px;
+  font-size: 0.85em;
+  border: none;
+  background: transparent;
+}
+
+/* SUMMARY calloutのスタイル */
+.callout-summary {
+  border-left: 4px solid #e6a23c;
+  background-color: rgba(230, 162, 60, 0.05);
+  padding: 1rem;
+}
+
+/* 本文エリアに左マージンを確保 */
+.cornell-notes .content {
+  max-width: 700px;
+  margin-left: 260px;
+}
