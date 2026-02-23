@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import type { Post } from "../../types";
+const pageTitle = "タグインデックス";
+
+const allPosts = Object.values(
+  import.meta.glob<Post>("../posts/*.md", { eager: true }),
+);
+---
+
+<BaseLayout pageTitle={pageTitle} />
