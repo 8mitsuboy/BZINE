@@ -5,23 +5,23 @@
 
 /* ── カスタムテーマトークン ── */
 @theme {
-  /* ダークモード */
-  --color-bzine-bg: #1a1a2e;
-  --color-bzine-surface: #16213e;
-  --color-bzine-surface-hover: #1c2a4a;
-  --color-bzine-accent: #88ccca;
-  --color-bzine-accent-hover: #a3dad8;
-  --color-bzine-text: #e2e8f0;
-  --color-bzine-text-muted: #94a3b8;
-  --color-bzine-border: #2d3748;
+  /* ダークモード (はちみつ) */
+  --color-bzine-bg: #1a1509;
+  --color-bzine-surface: #25200f;
+  --color-bzine-surface-hover: #302a18;
+  --color-bzine-accent: #e8a817;
+  --color-bzine-accent-hover: #f0be3a;
+  --color-bzine-text: #f5f0e3;
+  --color-bzine-text-muted: #a89a7c;
+  --color-bzine-border: #3d3520;
 
-  /* ライトモード */
-  --color-bzine-light-bg: #f7f8fc;
+  /* ライトモード (はちみつ) */
+  --color-bzine-light-bg: #fdf8ef;
   --color-bzine-light-surface: #ffffff;
-  --color-bzine-light-surface-hover: #f1f5f9;
-  --color-bzine-light-text: #1e293b;
-  --color-bzine-light-text-muted: #64748b;
-  --color-bzine-light-border: #e2e8f0;
+  --color-bzine-light-surface-hover: #faf3e3;
+  --color-bzine-light-text: #2c1e08;
+  --color-bzine-light-text-muted: #7a6840;
+  --color-bzine-light-border: #e8dcc4;
 
   /* フォント */
   --font-heading: "M PLUS Rounded 1c", sans-serif;
@@ -52,13 +52,18 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* ── テーマトランジション ── */
 html.dark *,
 html:not(.dark) * {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* ── リンク ── */
@@ -72,11 +77,11 @@ a:hover {
 }
 
 html:not(.dark) a {
-  color: #0d7377;
+  color: #b8860b;
 }
 
 html:not(.dark) a:hover {
-  color: #0a5c5f;
+  color: #9a7209;
 }
 
 /* ── Cornell Notes スタイル ── */
@@ -90,8 +95,12 @@ html:not(.dark) a:hover {
   color: var(--color-bzine-accent);
 }
 
+.callout-cue + * {
+  margin-top: 0;
+}
+
 html:not(.dark) .callout-cue {
-  color: #0d7377;
+  color: #b8860b;
 }
 
 .callout-summary {
@@ -100,7 +109,20 @@ html:not(.dark) .callout-cue {
   padding: 1rem;
   width: calc(100% + 260px);
   margin-left: -260px;
+  margin-top: 50px;
   border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* 区切り線: floatをクリアしてセクション区切りに */
+.cornell-notes .content hr {
+  clear: left;
+  border: none;
+  border-top: 1px solid var(--color-bzine-border);
+  margin: 2rem 0;
+}
+
+html:not(.dark) .cornell-notes .content hr {
+  border-top-color: var(--color-bzine-light-border);
 }
 
 .cornell-notes .content {
@@ -123,7 +145,7 @@ html:not(.dark) .callout-cue {
 
   html:not(.dark) .callout-cue {
     background-color: var(--color-bzine-light-surface);
-    border-left-color: #0d7377;
+    border-left-color: #b8860b;
   }
 
   .callout-summary {
@@ -149,7 +171,7 @@ html:not(.dark) .callout-cue {
 }
 
 html:not(.dark) .prose-bzine h2 {
-  border-bottom-color: #0d7377;
+  border-bottom-color: #b8860b;
 }
 
 .prose-bzine h3 {
@@ -169,7 +191,7 @@ html:not(.dark) .prose-bzine h2 {
 }
 
 html:not(.dark) .prose-bzine code {
-  background-color: #e2e8f0;
+  background-color: #f0e6cc;
 }
 
 .prose-bzine pre {
@@ -181,7 +203,7 @@ html:not(.dark) .prose-bzine code {
 }
 
 html:not(.dark) .prose-bzine pre {
-  background-color: #f1f5f9 !important;
+  background-color: #f8f0dc !important;
   border-color: var(--color-bzine-light-border);
 }
 
@@ -194,7 +216,7 @@ html:not(.dark) .prose-bzine pre {
 }
 
 html:not(.dark) .prose-bzine blockquote {
-  border-left-color: #0d7377;
+  border-left-color: #b8860b;
   color: var(--color-bzine-light-text-muted);
 }
 
@@ -206,6 +228,12 @@ html:not(.dark) .prose-bzine blockquote {
 .prose-bzine ul,
 .prose-bzine ol {
   padding-left: 1.5rem;
+}
+
+.cornell-notes .content ul,
+.cornell-notes .content ol {
+  padding-left: 0;
+  list-style-position: inside;
 }
 
 .prose-bzine li {
