@@ -2,10 +2,57 @@
 interface Props {
   url: string;
   title: string;
+  description?: string;
+  pubDate?: string;
+  image?: { url: string; alt: string };
+  tags?: string[];
 }
-const { url, title } = Astro.props;
+const { url, title, description, pubDate, image, tags } = Astro.props;
+
+const displayDate = pubDate
+  ? new Date(pubDate).toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+  : null;
 ---
 
-<li>
-  <a href={url}>{title}</a>
-</li>
+<a href={url} class="group block rounded-xl overflow-hidden bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 no-underline">
+  {image && (
+    <div class="overflow-hidden aspect-video">
+      <img
+        src={image.url}
+        alt={image.alt}
+        loading="lazy"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    </div>
+  )}
+  <div class="p-4">
+    <h3 class="font-heading font-bold text-lg text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors mb-1">
+      {title}
+    </h3>
+    {description && (
+      <p class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted line-clamp-2 mb-2">
+        {description}
+      </p>
+    )}
+    <div class="flex items-center gap-3 flex-wrap">
+      {displayDate && (
+        <time class="text-xs text-bzine-light-text-muted dark:text-bzine-text-muted">
+          {displayDate}
+        </time>
+      )}
+      {tags && tags.length > 0 && (
+        <div class="flex gap-1.5 flex-wrap">
+          {tags.slice(0, 3).map((tag) => (
+            <span class="text-xs px-2 py-0.5 rounded-full bg-bzine-accent/10 text-bzine-accent">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</a>
