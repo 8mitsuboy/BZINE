@@ -2,43 +2,49 @@
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
+
+const displayDate = new Date(frontmatter.pubDate).toLocaleDateString("ja-JP", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>投稿日: {frontmatter.pubDate.toString().slice(0, 10)}</p>
-  <p>著者: {frontmatter.author}</p>
-  <div class="tags">
+  <!-- メタ情報 -->
+  <div class="flex items-center gap-3 text-sm text-bzine-light-text-muted dark:text-bzine-text-muted mb-4">
+    <time>{displayDate}</time>
+    <span>&middot;</span>
+    <span>{frontmatter.author}</span>
+  </div>
+
+  <!-- タグ -->
+  <div class="flex flex-wrap gap-2 mb-6">
     {
       frontmatter.tags.map((tag: string) => (
-        <p class="tag">
-          <a href={`/tags/${tag}`}>{tag}</a>
-        </p>
+        <a
+          href={`/tags/${tag}`}
+          class="px-3 py-1 rounded-full text-xs font-medium bg-bzine-accent/15 text-bzine-accent hover:bg-bzine-accent/25 transition-colors no-underline"
+        >
+          {tag}
+        </a>
       ))
     }
   </div>
+
+  <!-- ヒーロー画像 -->
+  {frontmatter.image && (
+    <img
+      src={frontmatter.image.url}
+      alt={frontmatter.image.alt}
+      class="w-full rounded-xl mb-8 aspect-video object-cover"
+    />
+  )}
+
+  <!-- Cornell Notes レイアウト + prose-bzine タイポグラフィ -->
   <div class="cornell-notes">
-    <div class="content">
+    <div class="content prose-bzine">
       <slot />
     </div>
   </div>
 </BaseLayout>
-<style>
-  a {
-    color: #00539f;
-    text-decoration: none;
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: 0.5em;
-    padding: 0.5em 1em;
-    font-size: 1.15em;
-    background-color: #f8fcfd;
-  }
-</style>

@@ -28,12 +28,21 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <p>{tag}のタグが付いた記事</p>
-  <ul>
+  <p class="text-bzine-light-text-muted dark:text-bzine-text-muted mb-6">
+    {tag}のタグが付いた記事
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {
       posts.map((post: Post) => (
-        <BlogPost url={post.url} title={post.frontmatter.title} />
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          pubDate={post.frontmatter.pubDate}
+          image={post.frontmatter.image}
+          tags={post.frontmatter.tags}
+        />
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>

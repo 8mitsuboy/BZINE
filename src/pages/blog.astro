@@ -1,23 +1,35 @@
 ---
-import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
+import type { Post } from "../types";
+
 const allPosts = Object.values(
-  import.meta.glob<{ url: string; frontmatter: { title: string } }>(
-    "./posts/*.md",
-    { eager: true },
-  ),
+  import.meta.glob<Post>("./posts/*.md", { eager: true }),
+).sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).getTime() -
+    new Date(a.frontmatter.pubDate).getTime(),
 );
+
 const pageTitle = "学習ブログ";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <p>ここには、私がAstroを学んでいく旅の様子を投稿します。</p>
-  <ul>
+  <p class="text-bzine-light-text-muted dark:text-bzine-text-muted mb-8">
+    ここには、私がAstroを学んでいく旅の様子を投稿します。
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
     {
       allPosts.map((post) => (
-        <BlogPost url={post.url} title={post.frontmatter.title} />
+        <BlogPost
+          url={post.url}
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}
+          pubDate={post.frontmatter.pubDate}
+          image={post.frontmatter.image}
+          tags={post.frontmatter.tags}
+        />
       ))
     }
-  </ul>
+  </div>
 </BaseLayout>
