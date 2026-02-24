@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
-import Greeting from "../components/Greeting";
 import type { Post } from "../types";
 
 const pageTitle = "BZINE";
@@ -20,21 +19,23 @@ const allPosts = Object.values(
 <BaseLayout pageTitle={pageTitle}>
   <!-- ヒーローセクション -->
   <section class="mb-12">
-    <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bzine-accent/15 text-bzine-accent mb-4">
+    <span
+      class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bzine-accent/15 text-bzine-accent mb-4"
+    >
       Frontend Engineer
     </span>
-    <p class="text-lg text-bzine-light-text-muted dark:text-bzine-text-muted mb-6">
+    <p
+      class="text-lg text-bzine-light-text-muted dark:text-bzine-text-muted mb-6"
+    >
       フロントエンドに生息。かっこいいもの全般が好き。
     </p>
-    <Greeting
-      client:load
-      messages={["どうも", "こんにちは", "初めまして", "ようこそ"]}
-    />
   </section>
 
   <!-- 最近の投稿 -->
   <section>
-    <h2 class="font-heading font-bold text-2xl mb-6 text-bzine-light-text dark:text-bzine-text">
+    <h2
+      class="font-heading font-bold text-2xl mb-6 text-bzine-light-text dark:text-bzine-text"
+    >
       最近の投稿
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
