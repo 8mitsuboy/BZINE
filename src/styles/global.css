@@ -5,23 +5,23 @@
 
 /* ── カスタムテーマトークン ── */
 @theme {
-  /* ダークモード (はちみつ) */
-  --color-bzine-bg: #1a1509;
-  --color-bzine-surface: #25200f;
-  --color-bzine-surface-hover: #302a18;
-  --color-bzine-accent: #e8a817;
-  --color-bzine-accent-hover: #f0be3a;
-  --color-bzine-text: #f5f0e3;
-  --color-bzine-text-muted: #a89a7c;
-  --color-bzine-border: #3d3520;
+  /* ダークモード (Graphite Amber) */
+  --color-bzine-bg: #17171c;
+  --color-bzine-surface: #212127;
+  --color-bzine-surface-hover: #2b2b32;
+  --color-bzine-accent: #c4ad6c;
+  --color-bzine-accent-hover: #d6c08a;
+  --color-bzine-text: #dcdce2;
+  --color-bzine-text-muted: #7e7e8a;
+  --color-bzine-border: #2e2e36;
 
-  /* ライトモード (はちみつ) */
-  --color-bzine-light-bg: #fdf8ef;
-  --color-bzine-light-surface: #ffffff;
-  --color-bzine-light-surface-hover: #faf3e3;
-  --color-bzine-light-text: #2c1e08;
-  --color-bzine-light-text-muted: #7a6840;
-  --color-bzine-light-border: #e8dcc4;
+  /* ライトモード (Warm Cream) */
+  --color-bzine-light-bg: #f8f6f0;
+  --color-bzine-light-surface: #fefdfb;
+  --color-bzine-light-surface-hover: #f2efe6;
+  --color-bzine-light-text: #1a1a1e;
+  --color-bzine-light-text-muted: #6e6b62;
+  --color-bzine-light-border: #e4e0d6;
 
   /* フォント */
   --font-heading: "M PLUS Rounded 1c", sans-serif;
@@ -29,8 +29,8 @@
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 
   /* カード影 */
-  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 /* ── ベーススタイル ── */
@@ -77,11 +77,11 @@ a:hover {
 }
 
 html:not(.dark) a {
-  color: #b8860b;
+  color: #9a8a50;
 }
 
 html:not(.dark) a:hover {
-  color: #9a7209;
+  color: #857840;
 }
 
 /* ── Cornell Notes スタイル ── */
@@ -100,7 +100,7 @@ html:not(.dark) a:hover {
 }
 
 html:not(.dark) .callout-cue {
-  color: #b8860b;
+  color: #9a8a50;
 }
 
 .callout-summary {
@@ -145,7 +145,7 @@ html:not(.dark) .cornell-notes .content hr {
 
   html:not(.dark) .callout-cue {
     background-color: var(--color-bzine-light-surface);
-    border-left-color: #b8860b;
+    border-left-color: #9a8a50;
   }
 
   .callout-summary {
@@ -171,7 +171,7 @@ html:not(.dark) .cornell-notes .content hr {
 }
 
 html:not(.dark) .prose-bzine h2 {
-  border-bottom-color: #b8860b;
+  border-bottom-color: #9a8a50;
 }
 
 .prose-bzine h3 {
@@ -191,7 +191,7 @@ html:not(.dark) .prose-bzine h2 {
 }
 
 html:not(.dark) .prose-bzine code {
-  background-color: #f0e6cc;
+  background-color: #e8e8ee;
 }
 
 .prose-bzine pre {
@@ -203,7 +203,7 @@ html:not(.dark) .prose-bzine code {
 }
 
 html:not(.dark) .prose-bzine pre {
-  background-color: #f8f0dc !important;
+  background-color: #ededf2 !important;
   border-color: var(--color-bzine-light-border);
 }
 
@@ -216,7 +216,7 @@ html:not(.dark) .prose-bzine pre {
 }
 
 html:not(.dark) .prose-bzine blockquote {
-  border-left-color: #b8860b;
+  border-left-color: #9a8a50;
   color: var(--color-bzine-light-text-muted);
 }
 

@@ -3,24 +3,267 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "私について";
 
-const skills = ["TypeScript", "React", "Next.js", "Astro", "Flutter"];
+const skills = [
+  { name: "TypeScript", level: "主力" },
+  { name: "React", level: "主力" },
+  { name: "Next.js", level: "主力" },
+  { name: "Astro", level: "学習中" },
+  { name: "Flutter", level: "主力" },
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <h2 class="font-heading font-bold text-xl mb-4 text-bzine-light-text dark:text-bzine-text">
-    It's a piece of cake
-  </h2>
+  <!-- 自己紹介 -->
+  <section class="mb-10">
+    <div class="flex items-center gap-4 mb-6">
+      <img
+        src="/images/avatar.png"
+        alt="はちみつぼーい"
+        class="w-20 h-20 rounded-full object-cover"
+      />
+      <div>
+        <h2
+          class="font-heading font-bold text-2xl text-bzine-light-text dark:text-bzine-text"
+        >
+          はちみつぼーい
+        </h2>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
+        >
+          Frontend Engineer
+        </p>
+      </div>
+    </div>
 
-  <p class="text-bzine-light-text-muted dark:text-bzine-text-muted mb-6">
-    フロントエンドに生息。かっこいいもの全般が好き。
-  </p>
+    <p
+      class="text-bzine-light-text-muted dark:text-bzine-text-muted mb-4 leading-relaxed"
+    >
+      フロントエンドエンジニアで「かっこいいもの全般が好き」という
+      シンプルな動機で、日々新しい技術を追いかけています。
+    </p>
+    <p
+      class="text-bzine-light-text-muted dark:text-bzine-text-muted leading-relaxed"
+    >
+      このブログでは、学んだことや気づいたことを自分の言葉で残しています。
+    </p>
+  </section>
 
-  <h3 class="font-heading font-bold text-lg mb-3 text-bzine-light-text dark:text-bzine-text">Skills</h3>
-  <div class="flex flex-wrap gap-2">
-    {skills.map((skill) => (
-      <span class="px-3 py-1.5 rounded-full text-sm font-medium bg-bzine-accent/15 text-bzine-accent">
-        {skill}
-      </span>
-    ))}
-  </div>
+  <!-- Skills -->
+  <section class="mb-10">
+    <h3
+      class="font-heading font-bold text-lg mb-4 text-bzine-light-text dark:text-bzine-text"
+    >
+      Skills
+    </h3>
+    <div class="flex flex-wrap gap-2">
+      {
+        skills.map(({ name, level }) => (
+          <span
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm font-medium",
+              level === "主力"
+                ? "bg-bzine-accent/15 text-bzine-accent"
+                : "bg-bzine-light-surface-hover dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border text-bzine-light-text-muted dark:text-bzine-text-muted",
+            ]}
+          >
+            {name}
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Works -->
+  <section class="mb-10">
+    <h3
+      class="font-heading font-bold text-lg mb-4 text-bzine-light-text dark:text-bzine-text"
+    >
+      Works
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=8mitsuboy.warp-cyber-wave"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline"
+      >
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🎨</span>
+          <p
+            class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
+          >
+            Warp Cyber Wave
+          </p>
+        </div>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted mb-3"
+        >
+          Warp ターミナルの Cyber Wave テーマにインスパイアされた VS Code
+          カラーテーマ。
+          サイバーパンク風のダークな配色で、コーディングの気分を上げる。
+        </p>
+        <span
+          class="inline-block px-2 py-0.5 rounded text-xs bg-bzine-accent/10 text-bzine-accent"
+        >
+          VS Code Theme
+        </span>
+      </a>
+      <a
+        href="https://marketplace.visualstudio.com/items?itemName=ak-nagae.sidevar"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline"
+      >
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">📖</span>
+          <p
+            class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
+          >
+            SideVar
+          </p>
+        </div>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted mb-3"
+        >
+          ローカル LLM
+          を活用し、ファイル内の変数名を辞書形式でサイドバーに表示する VS Code
+          拡張機能。変数の役割を AI が自動解析。
+        </p>
+        <span
+          class="inline-block px-2 py-0.5 rounded text-xs bg-bzine-accent/10 text-bzine-accent"
+        >
+          VS Code Extension
+        </span>
+      </a>
+      <a
+        href="https://tokyo-flutter-hackathon.connpass.com/event/368402/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline md:col-span-2"
+      >
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">🏆</span>
+          <p
+            class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
+          >
+            Tokyo Flutter Hackathon
+          </p>
+        </div>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted mb-3"
+        >
+          2日間でチーム開発を行う Flutter
+          ハッカソン。当日発表されるサプライズテーマに沿ってアプリを開発し、プレゼン・審査で競う。
+        </p>
+        <div class="flex gap-2">
+          <span
+            class="inline-block px-2 py-0.5 rounded text-xs bg-bzine-accent/10 text-bzine-accent"
+          >
+            2024 - 3位
+          </span>
+          <span
+            class="inline-block px-2 py-0.5 rounded text-xs bg-bzine-accent/20 text-bzine-accent font-medium"
+          >
+            2025 - 優勝
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section class="mb-10">
+    <h3
+      class="font-heading font-bold text-lg mb-4 text-bzine-light-text dark:text-bzine-text"
+    >
+      What I Do
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        class="p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border"
+      >
+        <p class="font-medium text-bzine-light-text dark:text-bzine-text mb-1">
+          Web開発
+        </p>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
+        >
+          React / Next.js を中心に
+        </p>
+      </div>
+      <div
+        class="p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border"
+      >
+        <p class="font-medium text-bzine-light-text dark:text-bzine-text mb-1">
+          モバイル
+        </p>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
+        >
+          Flutter を中心に
+        </p>
+      </div>
+      <div
+        class="p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border"
+      >
+        <p class="font-medium text-bzine-light-text dark:text-bzine-text mb-1">
+          ブログ
+        </p>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
+        >
+          学習したことを見返せるように
+        </p>
+      </div>
+      <div
+        class="p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border"
+      >
+        <p class="font-medium text-bzine-light-text dark:text-bzine-text mb-1">
+          デザイン
+        </p>
+        <p
+          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
+        >
+          万年VSCodeテーマ迷子
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section>
+    <h3
+      class="font-heading font-bold text-lg mb-4 text-bzine-light-text dark:text-bzine-text"
+    >
+      Links
+    </h3>
+    <div class="flex flex-wrap gap-3">
+      <a
+        href="https://github.com/8mitsuboy"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border text-bzine-light-text dark:text-bzine-text hover:border-bzine-accent/40 transition-colors text-sm no-underline"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+          ><path
+            d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"
+          ></path></svg
+        >
+        GitHub
+      </a>
+      <a
+        href="https://twitter.com/8mitsul3oy"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border text-bzine-light-text dark:text-bzine-text hover:border-bzine-accent/40 transition-colors text-sm no-underline"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"
+          ><path
+            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+          ></path></svg
+        >
+        X (Twitter)
+      </a>
+    </div>
+  </section>
 </BaseLayout>
