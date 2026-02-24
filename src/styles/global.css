@@ -1,84 +1,85 @@
+@import "tailwindcss";
+
+/* ── ダークモード: .dark クラスベース ── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── カスタムテーマトークン ── */
+@theme {
+  /* ダークモード */
+  --color-bzine-bg: #1a1a2e;
+  --color-bzine-surface: #16213e;
+  --color-bzine-surface-hover: #1c2a4a;
+  --color-bzine-accent: #88ccca;
+  --color-bzine-accent-hover: #a3dad8;
+  --color-bzine-text: #e2e8f0;
+  --color-bzine-text-muted: #94a3b8;
+  --color-bzine-border: #2d3748;
+
+  /* ライトモード */
+  --color-bzine-light-bg: #f7f8fc;
+  --color-bzine-light-surface: #ffffff;
+  --color-bzine-light-surface-hover: #f1f5f9;
+  --color-bzine-light-text: #1e293b;
+  --color-bzine-light-text-muted: #64748b;
+  --color-bzine-light-border: #e2e8f0;
+
+  /* フォント */
+  --font-heading: "M PLUS Rounded 1c", sans-serif;
+  --font-body: "M PLUS Rounded 1c", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* カード影 */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ── ベーススタイル ── */
 html {
-  background-color: #f1f5f9;
-  font-family: sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--color-bzine-light-bg);
+  color: var(--color-bzine-light-text);
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  background-color: var(--color-bzine-bg);
+  color: var(--color-bzine-text);
 }
 
 body {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 80ch;
-  padding: 1rem;
-  line-height: 1.5;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-h1 {
-  margin: 1rem 0;
-  font-size: 2.5rem;
-}
-
-/* ナビゲーションのスタイル */
-
-.menu {
-  background-color: #0d0950;
-  border: none;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding: 5px 10px;
-}
-
-.nav-links {
-  width: 100%;
-  display: none;
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav-links a {
-  display: block;
-  text-align: center;
-  padding: 10px 0;
+/* ── テーマトランジション ── */
+html.dark *,
+html:not(.dark) * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ── リンク ── */
+a {
+  color: var(--color-bzine-accent);
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #0d0950;
 }
 
-.nav-links a:hover,
-.nav-links a:focus {
-  background-color: #ff9776;
+a:hover {
+  color: var(--color-bzine-accent-hover);
 }
 
-:has(.menu[aria-expanded="true"]) .nav-links {
-  display: unset;
+html:not(.dark) a {
+  color: #0d7377;
 }
 
-@media screen and (min-width: 636px) {
-  .nav-links {
-    margin-left: 5em;
-    display: block;
-    position: static;
-    width: auto;
-    background: none;
-  }
-
-  .nav-links a {
-    display: inline-block;
-    padding: 15px 20px;
-  }
-
-  .menu {
-    display: none;
-  }
+html:not(.dark) a:hover {
+  color: #0a5c5f;
 }
 
-/* Cornell Notes スタイル */
-
-/* CUE calloutを左マージンに配置 */
+/* ── Cornell Notes スタイル ── */
 .callout-cue {
   float: left;
   width: 200px;
@@ -86,44 +87,127 @@ h1 {
   font-size: 0.85em;
   border: none;
   background: transparent;
+  color: var(--color-bzine-accent);
 }
 
-/* SUMMARY calloutのスタイル */
+html:not(.dark) .callout-cue {
+  color: #0d7377;
+}
+
 .callout-summary {
   border-left: 4px solid #e6a23c;
-  background-color: rgba(230, 162, 60, 0.05);
+  background-color: rgba(230, 162, 60, 0.08);
   padding: 1rem;
   width: calc(100% + 260px);
   margin-left: -260px;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
-/* 本文エリアに左マージンを確保 */
 .cornell-notes .content {
   max-width: 700px;
   margin-left: 260px;
 }
 
-/* テーマ切り替え */
+/* Cornell Notes モバイルレスポンシブ */
+@media screen and (max-width: 1024px) {
+  .callout-cue {
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--color-bzine-surface);
+    border-left: 3px solid var(--color-bzine-accent);
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
 
-html.dark {
-  background-color: #0d0950;
-  color: #fff;
+  html:not(.dark) .callout-cue {
+    background-color: var(--color-bzine-light-surface);
+    border-left-color: #0d7377;
+  }
+
+  .callout-summary {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .cornell-notes .content {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
-.dark .menu {
-  background-color: #fff;
-  color: #000;
+/* ── prose-bzine: 記事本文のタイポグラフィ ── */
+.prose-bzine h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid var(--color-bzine-accent);
 }
 
-.dark .nav-links a:hover,
-.dark .nav-links a:focus {
-  color: #0d0950;
+html:not(.dark) .prose-bzine h2 {
+  border-bottom-color: #0d7377;
 }
 
-.dark .nav-links a {
-  color: #fff;
+.prose-bzine h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.dark a {
-  color: #ff9776;
+.prose-bzine code {
+  font-family: var(--font-mono);
+  background-color: var(--color-bzine-surface);
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+
+html:not(.dark) .prose-bzine code {
+  background-color: #e2e8f0;
+}
+
+.prose-bzine pre {
+  background-color: var(--color-bzine-surface) !important;
+  border: 1px solid var(--color-bzine-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+html:not(.dark) .prose-bzine pre {
+  background-color: #f1f5f9 !important;
+  border-color: var(--color-bzine-light-border);
+}
+
+.prose-bzine blockquote {
+  border-left: 4px solid var(--color-bzine-accent);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--color-bzine-text-muted);
+  font-style: italic;
+}
+
+html:not(.dark) .prose-bzine blockquote {
+  border-left-color: #0d7377;
+  color: var(--color-bzine-light-text-muted);
+}
+
+.prose-bzine img {
+  border-radius: 0.5rem;
+  max-width: 100%;
+}
+
+.prose-bzine ul,
+.prose-bzine ol {
+  padding-left: 1.5rem;
+}
+
+.prose-bzine li {
+  margin-bottom: 0.25rem;
 }
