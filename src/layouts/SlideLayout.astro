@@ -1,0 +1,91 @@
+---
+const { frontmatter } = Astro.props;
+const postUrl = frontmatter.postUrl;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{frontmatter.title} - スライド</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/reveal/reveal.css" />
+    <link rel="stylesheet" href="/reveal/theme/black.css" />
+    <link rel="stylesheet" href="/reveal/plugin/highlight/monokai.css" />
+    <style is:global>
+      :root {
+        --r-background-color: #17171c;
+        --r-main-color: #dcdce2;
+        --r-heading-color: #dcdce2;
+        --r-link-color: #c4ad6c;
+        --r-link-color-hover: #d6c08a;
+        --r-heading-font: "M PLUS Rounded 1c", sans-serif;
+        --r-main-font: "M PLUS Rounded 1c", sans-serif;
+      }
+      .reveal .slides section {
+        text-align: left;
+      }
+      .reveal h1, .reveal h2, .reveal h3 {
+        text-transform: none;
+      }
+      .reveal pre {
+        width: 100%;
+      }
+      .reveal code {
+        font-size: 0.85em;
+      }
+      .back-link {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 100;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-family: "M PLUS Rounded 1c", sans-serif;
+        background: rgba(196, 173, 108, 0.15);
+        color: #c4ad6c;
+        text-decoration: none;
+        transition: background 0.2s;
+      }
+      .back-link:hover {
+        background: rgba(196, 173, 108, 0.25);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <div id="slide-content">
+          <slot />
+        </div>
+      </div>
+    </div>
+    {postUrl && <a href={postUrl} class="back-link">← 記事に戻る</a>}
+    <script is:inline>
+      // <hr> を境界にしてコンテンツを <section> に分割
+      const container = document.getElementById("slide-content");
+      const slides = container.parentElement;
+      const nodes = Array.from(container.childNodes);
+      let section = document.createElement("section");
+
+      for (const node of nodes) {
+        if (node.nodeType === 1 && node.tagName === "HR") {
+          slides.appendChild(section);
+          section = document.createElement("section");
+        } else {
+          section.appendChild(node);
+        }
+      }
+      slides.appendChild(section);
+      container.remove();
+
+      import("/reveal/reveal.esm.js").then(({ default: Reveal }) => {
+        Reveal.initialize({ hash: true });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+interface SlideEntry {
+  url: string;
+  frontmatter: {
+    title: string;
+    postUrl?: string;
+  };
+}
+
+const allSlides = Object.values(
+  import.meta.glob<SlideEntry>("./*.md", { eager: true }),
+);
+
+const pageTitle = "スライド";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <p class="text-bzine-light-text-muted dark:text-bzine-text-muted mb-8">
+    プレゼンテーション用のスライド一覧です。
+  </p>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {
+      allSlides.map((slide) => (
+        <a
+          href={slide.url}
+          class="group block rounded-xl overflow-hidden bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 no-underline p-5"
+        >
+          <div class="flex items-center gap-3 mb-3 text-bzine-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>
+            <span class="text-xs font-medium bg-bzine-accent/15 px-2 py-0.5 rounded-full">スライド</span>
+          </div>
+          <h3 class="font-heading font-bold text-lg text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors">
+            {slide.frontmatter.title}
+          </h3>
+        </a>
+      ))
+    }
+  </div>
+</BaseLayout>

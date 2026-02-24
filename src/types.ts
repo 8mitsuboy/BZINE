@@ -10,5 +10,6 @@ export interface Post {
       alt: string;
     };
     tags: string[];
+    hasSlide?: boolean;
   };
 }
