@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const pageTitle = "私について";
+const pageTitle = "";
 
 const skills = [
   { name: "TypeScript", level: "主力" },
@@ -15,24 +15,28 @@ const skills = [
 <BaseLayout pageTitle={pageTitle}>
   <!-- 自己紹介 -->
   <section class="mb-10">
-    <div class="flex items-center gap-4 mb-6">
-      <img
-        src="/images/avatar.png"
-        alt="はちみつぼーい"
-        class="w-20 h-20 rounded-full object-cover"
-      />
-      <div>
-        <h2
-          class="font-heading font-bold text-2xl text-bzine-light-text dark:text-bzine-text"
+    <div class="flex flex-col items-center text-center mb-6">
+      <div class="relative pt-8 mb-3">
+        <!-- 丸い背景 -->
+        <div
+          class="w-28 h-28 rounded-full bg-bzine-light-surface dark:bg-bzine-surface border-2 border-bzine-light-border dark:border-bzine-border shadow-lg"
         >
-          はちみつぼーい
-        </h2>
-        <p
-          class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted"
-        >
-          Frontend Engineer
-        </p>
+        </div>
+        <!-- アバター（頭が丸の上からはみ出る） -->
+        <img
+          src="/images/avatar.png"
+          alt="はちみつぼーい"
+          class="absolute bottom-0 left-1/2 -translate-x-1/2 w-36 z-10 drop-shadow-md"
+        />
       </div>
+      <h2
+        class="font-heading font-bold text-2xl text-bzine-light-text dark:text-bzine-text"
+      >
+        はちみつぼーい
+      </h2>
+      <p class="text-sm text-bzine-light-text-muted dark:text-bzine-text-muted">
+        Frontend Engineer
+      </p>
     </div>
 
     <p
