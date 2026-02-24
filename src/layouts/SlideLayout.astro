@@ -1,58 +1,199 @@
 ---
+interface Props {
+  frontmatter: {
+    title: string;
+    postUrl?: string;
+  };
+}
+
 const { frontmatter } = Astro.props;
-const postUrl = frontmatter.postUrl;
+const { title, postUrl } = frontmatter;
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{frontmatter.title} - スライド</title>
+    <title>{title} - スライド</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="/reveal/reveal.css" />
-    <link rel="stylesheet" href="/reveal/theme/black.css" />
-    <link rel="stylesheet" href="/reveal/plugin/highlight/monokai.css" />
     <style is:global>
       :root {
-        --r-background-color: #17171c;
-        --r-main-color: #dcdce2;
-        --r-heading-color: #dcdce2;
-        --r-link-color: #c4ad6c;
-        --r-link-color-hover: #d6c08a;
-        --r-heading-font: "M PLUS Rounded 1c", sans-serif;
-        --r-main-font: "M PLUS Rounded 1c", sans-serif;
+        --slide-bg: #17171c;
+        --slide-text: #dcdce2;
+        --slide-text-muted: #b8b8be;
+        --slide-text-subtle: #7e7e8a;
+        --slide-accent: #c4ad6c;
+        --slide-accent-hover: #d6c08a;
+        --slide-surface: #1e1e24;
+        --slide-border: #2e2e36;
+        --slide-inline-code-bg: #2b2b32;
+        --slide-font: "M PLUS Rounded 1c", sans-serif;
+        --slide-octagon: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+
+        --r-background-color: var(--slide-bg);
+        --r-main-color: var(--slide-text);
+        --r-heading-color: var(--slide-text);
+        --r-link-color: var(--slide-accent);
+        --r-link-color-hover: var(--slide-accent-hover);
+        --r-heading-font: var(--slide-font);
+        --r-main-font: var(--slide-font);
+        --r-main-font-size: 28px;
       }
+
+      .reveal, body {
+        background: var(--slide-bg) !important;
+      }
+
+      /* ブランドマーク（右上） */
+      .slide-brand {
+        position: fixed;
+        top: 20px;
+        right: 28px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--slide-font);
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: var(--slide-text-subtle);
+        letter-spacing: 0.05em;
+      }
+      .slide-brand-icon {
+        width: 22px;
+        height: 22px;
+        border: 2px solid var(--slide-accent);
+        clip-path: var(--slide-octagon);
+      }
+
+      /* セクション */
       .reveal .slides section {
         text-align: left;
+        padding: 70px 100px;
+        box-sizing: border-box;
       }
+
+      /* 見出し */
       .reveal h1, .reveal h2, .reveal h3 {
         text-transform: none;
+        color: var(--slide-text);
       }
+      .reveal h2 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.8em;
+        padding-left: 0.6em;
+        border-left: 4px solid var(--slide-accent);
+      }
+      .reveal h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--slide-accent);
+        margin-top: 0.8em;
+        margin-bottom: 0.4em;
+      }
+
+      /* 本文 */
+      .reveal p {
+        font-size: 1.3rem;
+        line-height: 1.9;
+        color: var(--slide-text-muted);
+      }
+      .reveal li {
+        font-size: 1.2rem;
+        line-height: 2;
+        color: var(--slide-text-muted);
+        margin-bottom: 0.15em;
+      }
+      .reveal ul, .reveal ol {
+        margin-top: 0.3em;
+      }
+
+      /* リスト（カスタムマーカー） */
+      .reveal ul {
+        list-style: none;
+        padding-left: 0.2em;
+      }
+      .reveal ul > li {
+        padding-left: 1.6em;
+        position: relative;
+      }
+      .reveal ul > li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 10px;
+        height: 10px;
+        background: var(--slide-accent);
+        clip-path: var(--slide-octagon);
+      }
+
+      /* strong */
+      .reveal li strong {
+        font-size: 1.3rem;
+        color: var(--slide-text);
+      }
+
+      /* コードブロック */
       .reveal pre {
         width: 100%;
+        font-size: 0.9rem;
+        background: var(--slide-surface) !important;
+        border: 1px solid var(--slide-border);
+        border-radius: 10px;
+        margin-top: 0.6em;
       }
       .reveal code {
         font-size: 0.85em;
       }
+      .reveal :not(pre) > code {
+        background: var(--slide-inline-code-bg);
+        padding: 0.15em 0.4em;
+        border-radius: 4px;
+        color: var(--slide-text);
+      }
+
+      /* スライド番号（左下） */
+      .reveal .slide-number {
+        font-family: var(--slide-font);
+        font-size: 0.75rem;
+        color: var(--slide-text-subtle);
+        background: transparent;
+        right: auto;
+        left: 28px;
+        bottom: 20px;
+      }
+
+      /* 戻るリンク */
       .back-link {
         position: fixed;
         top: 16px;
-        left: 16px;
+        left: 20px;
         z-index: 100;
         padding: 6px 14px;
         border-radius: 9999px;
         font-size: 0.75rem;
-        font-family: "M PLUS Rounded 1c", sans-serif;
-        background: rgba(196, 173, 108, 0.15);
-        color: #c4ad6c;
+        font-family: var(--slide-font);
+        background: rgba(196, 173, 108, 0.12);
+        color: var(--slide-accent);
         text-decoration: none;
         transition: background 0.2s;
       }
       .back-link:hover {
         background: rgba(196, 173, 108, 0.25);
+      }
+
+      /* ナビゲーション矢印を非表示 */
+      .reveal .controls {
+        display: none;
       }
     </style>
   </head>
@@ -64,27 +205,44 @@ const postUrl = frontmatter.postUrl;
         </div>
       </div>
     </div>
-    {postUrl && <a href={postUrl} class="back-link">← 記事に戻る</a>}
-    <script is:inline>
-      // <hr> を境界にしてコンテンツを <section> に分割
-      const container = document.getElementById("slide-content");
-      const slides = container.parentElement;
-      const nodes = Array.from(container.childNodes);
-      let section = document.createElement("section");
 
-      for (const node of nodes) {
-        if (node.nodeType === 1 && node.tagName === "HR") {
-          slides.appendChild(section);
-          section = document.createElement("section");
-        } else {
-          section.appendChild(node);
+    <div class="slide-brand">
+      <div class="slide-brand-icon"></div>
+      BZINE
+    </div>
+
+    {postUrl && (
+      <a href={postUrl} class="back-link">← 記事に戻る</a>
+    )}
+
+    <script is:inline>
+      // Markdownの <hr> を境界にしてコンテンツを <section> に分割
+      (function splitSlides() {
+        const container = document.getElementById("slide-content");
+        const slidesRoot = container.parentElement;
+        let section = document.createElement("section");
+
+        for (const node of Array.from(container.childNodes)) {
+          if (node.nodeType === Node.ELEMENT_NODE && node.tagName === "HR") {
+            slidesRoot.appendChild(section);
+            section = document.createElement("section");
+          } else {
+            section.appendChild(node);
+          }
         }
-      }
-      slides.appendChild(section);
-      container.remove();
+        slidesRoot.appendChild(section);
+        container.remove();
+      })();
 
       import("/reveal/reveal.esm.js").then(({ default: Reveal }) => {
-        Reveal.initialize({ hash: true });
+        Reveal.initialize({
+          hash: true,
+          width: 1400,
+          height: 788,
+          margin: 0.02,
+          center: false,
+          slideNumber: true,
+        });
       });
     </script>
   </body>
