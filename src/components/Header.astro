@@ -1,22 +1,65 @@
 ---
 import Navigation from "./Navigation.astro";
-import Menu from "./Menu.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
-<header>
-  <nav>
-    <div>
+<header class="fixed top-0 left-0 right-0 z-50 bg-bzine-light-bg/80 dark:bg-bzine-bg/80 backdrop-blur-md border-b border-bzine-light-border dark:border-bzine-border">
+  <nav class="max-w-[65ch] mx-auto px-6 h-14 flex items-center justify-between">
+    <!-- ロゴ -->
+    <a href="/" class="font-heading font-bold text-xl tracking-tight text-bzine-light-text dark:text-bzine-text hover:text-bzine-accent dark:hover:text-bzine-accent no-underline">
+      BZINE
+    </a>
+
+    <!-- デスクトップナビ + テーマ切替 -->
+    <div class="flex items-center gap-4">
+      <Navigation />
       <ThemeIcon />
-      <Menu />
+
+      <!-- モバイルハンバーガー -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 cursor-pointer bg-transparent border-none"
+        aria-label="メニュー"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line block w-5 h-0.5 bg-bzine-light-text dark:bg-bzine-text rounded-full transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-bzine-light-text dark:bg-bzine-text rounded-full transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line block w-5 h-0.5 bg-bzine-light-text dark:bg-bzine-text rounded-full transition-all duration-300 origin-center"></span>
+      </button>
     </div>
-    <Navigation />
   </nav>
+
+  <!-- モバイルメニュー -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-bzine-light-border dark:border-bzine-border bg-bzine-light-bg/95 dark:bg-bzine-bg/95 backdrop-blur-md">
+    <div class="px-6 py-4 flex flex-col gap-2">
+      <a href="/" class="block py-2 px-3 rounded-lg text-bzine-light-text dark:text-bzine-text hover:bg-bzine-light-surface-hover dark:hover:bg-bzine-surface-hover font-medium no-underline">Home</a>
+      <a href="/about/" class="block py-2 px-3 rounded-lg text-bzine-light-text dark:text-bzine-text hover:bg-bzine-light-surface-hover dark:hover:bg-bzine-surface-hover font-medium no-underline">About</a>
+      <a href="/blog/" class="block py-2 px-3 rounded-lg text-bzine-light-text dark:text-bzine-text hover:bg-bzine-light-surface-hover dark:hover:bg-bzine-surface-hover font-medium no-underline">Blog</a>
+      <a href="/tags/" class="block py-2 px-3 rounded-lg text-bzine-light-text dark:text-bzine-text hover:bg-bzine-light-surface-hover dark:hover:bg-bzine-surface-hover font-medium no-underline">Tags</a>
+    </div>
+  </div>
 </header>
 
 <style>
-  div {
-    display: flex;
-    justify-content: space-between;
+  /* ハンバーガー開閉アニメーション */
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-4px) rotate(-45deg);
   }
 </style>
+
+<script is:inline>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn?.addEventListener("click", () => {
+    const isOpen = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!isOpen));
+    menu?.classList.toggle("hidden");
+  });
+</script>

@@ -1,10 +1,28 @@
 ---
-
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about/", label: "About" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/tags/", label: "Tags" },
+];
 ---
 
-<div id="main-menu" class="nav-links">
-  <a href="/">Home</a>
-  <a href="/about/">About</a>
-  <a href="/blog/">Blog</a>
-  <a href="/tags/">Tags</a>
+<div class="hidden md:flex items-center gap-1">
+  {links.map(({ href, label }) => {
+    const isActive = currentPath === href || (href !== "/" && currentPath.startsWith(href));
+    return (
+      <a
+        href={href}
+        class:list={[
+          "px-3 py-1.5 rounded-full text-sm font-medium no-underline transition-colors",
+          isActive
+            ? "bg-bzine-accent/15 text-bzine-accent"
+            : "text-bzine-light-text-muted dark:text-bzine-text-muted hover:bg-bzine-light-surface-hover dark:hover:bg-bzine-surface-hover hover:text-bzine-light-text dark:hover:text-bzine-text",
+        ]}
+      >
+        {label}
+      </a>
+    );
+  })}
 </div>
