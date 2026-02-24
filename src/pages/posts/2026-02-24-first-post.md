@@ -8,6 +8,7 @@ image:
   url: "https://docs.astro.build/assets/rose.webp"
   alt: "ピンク色に輝く暗い背景に浮かぶAstroのロゴ。"
 tags: ["astro", "ブログ"]
+hasSlide: true
 ---
 
 <div class="callout-cue">
