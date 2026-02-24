@@ -7,7 +7,7 @@ const skills = [
   { name: "TypeScript", level: "主力" },
   { name: "React", level: "主力" },
   { name: "Next.js", level: "主力" },
-  { name: "Astro", level: "学習中" },
+  { name: "Astro", level: "主力" },
   { name: "Flutter", level: "主力" },
 ];
 ---
@@ -62,14 +62,7 @@ const skills = [
     <div class="flex flex-wrap gap-2">
       {
         skills.map(({ name, level }) => (
-          <span
-            class:list={[
-              "px-3 py-1.5 rounded-full text-sm font-medium",
-              level === "主力"
-                ? "bg-bzine-accent/15 text-bzine-accent"
-                : "bg-bzine-light-surface-hover dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border text-bzine-light-text-muted dark:text-bzine-text-muted",
-            ]}
-          >
+          <span class=" px-3 py-1.5 rounded-full text-sm font-medium bg-bzine-accent/15 text-bzine-accent">
             {name}
           </span>
         ))
@@ -92,7 +85,6 @@ const skills = [
         class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline"
       >
         <div class="flex items-center gap-2 mb-2">
-          <span class="text-lg">🎨</span>
           <p
             class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
           >
@@ -119,7 +111,6 @@ const skills = [
         class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline"
       >
         <div class="flex items-center gap-2 mb-2">
-          <span class="text-lg">📖</span>
           <p
             class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
           >
@@ -146,7 +137,6 @@ const skills = [
         class="group p-4 rounded-xl bg-bzine-light-surface dark:bg-bzine-surface border border-bzine-light-border dark:border-bzine-border hover:border-bzine-accent/40 hover:-translate-y-0.5 transition-all no-underline md:col-span-2"
       >
         <div class="flex items-center gap-2 mb-2">
-          <span class="text-lg">🏆</span>
           <p
             class="font-medium text-bzine-light-text dark:text-bzine-text group-hover:text-bzine-accent transition-colors"
           >
